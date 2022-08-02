@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/sky_blue"
-    tools:context=".ShelterListActivity">
+    android:orientation="vertical"
+    tools:context=".AcceptingAnimal">
 
     <TextView
-        android:id="@+id/title_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_height="200dp"
+        android:text="Which shelter should receive the animal?"
         android:textSize="20sp"
-        android:padding="8dp"
-        android:text="List of Shelters"/>
+        android:textStyle="bold"
+        android:background="@color/white"
+        android:padding="50dp"/>
 
     <ListView
         android:id="@+id/shelter_list"

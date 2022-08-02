@@ -2,7 +2,20 @@ package edu.metrostate.sheltertracker;
 
 import androidx.annotation.NonNull;
 
+/*
+This class is used to represent the shelter objects
+ */
+
 public class Animal {
+    public Animal(String animalName, String animalId, double weight, String animalType, long receiptDate, String weightUnit) {
+        this.animalName = animalName;
+        this.animalId = animalId;
+        this.weight = weight;
+        this.animalType = animalType;
+        this.receiptDate = receiptDate;
+        this.weightUnit = weightUnit;
+    }
+
     public String getAnimalName() {
         return animalName;
     }

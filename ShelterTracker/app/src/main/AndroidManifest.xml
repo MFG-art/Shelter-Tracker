@@ -4,6 +4,7 @@
     package="edu.metrostate.sheltertracker">
 
     <application
+        android:name=".ShelterTrackerApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,11 +12,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".ShelterTrackerApplication"
         android:theme="@style/Theme.ShelterTracker"
         tools:targetApi="31">
         <activity
+            android:name=".AcceptingAnimal"
+            android:exported="false" />
+        <activity
+            android:name=".activity_shelter"
+            android:exported="false" />
+        <activity
             android:name=".ShelterListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AnimalListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

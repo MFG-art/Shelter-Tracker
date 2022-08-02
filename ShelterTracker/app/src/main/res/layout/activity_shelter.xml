@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_shelter"
+    android:background="@color/sky_blue"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/shelter_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Shelter Name"
+        />
+
+    <TextView
+        android:id="@+id/shelter_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:text="Shelter ID"
+        />
+
+    <ListView
+        android:id="@+id/animal_list"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/white"
+        />
+
+    <Button
+        android:id="@+id/accepting_animals_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable receiving animals"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        />
+
+    <Button
+        android:id="@+id/export_shelter_json_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Export shelter animals to JSON"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        />
+
+
+</LinearLayout>

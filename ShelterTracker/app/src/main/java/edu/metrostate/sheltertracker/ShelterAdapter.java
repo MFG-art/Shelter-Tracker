@@ -17,6 +17,11 @@ public class ShelterAdapter extends ArrayAdapter<Shelter> {
         super(context, R.layout.shelter_list_item, shelterList);
     }
 
+
+    /*
+    This is used to populate the shelter ListView with data from the list of Shelter objects
+    */
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -30,6 +35,7 @@ public class ShelterAdapter extends ArrayAdapter<Shelter> {
 
         id.setText(getItem(position).getShelterId());
         name.setText(getItem(position).getShelterName());
+
 
         return convertView;
     }

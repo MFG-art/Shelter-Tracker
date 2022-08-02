@@ -1,6 +1,7 @@
 package edu.metrostate.sheltertracker;
 
 import android.app.Application;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 
 import java.io.File;
@@ -12,12 +13,14 @@ import java.util.List;
 public class ShelterTrackerApplication extends Application {
 
     private final List<Shelter> shelterList = new ArrayList<>();
+    private final List<Animal> animalsOutsideShelters = new ArrayList<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
         for(int i = 0; i < 20; i++) {
             shelterList.add(new Shelter(Integer.toString(i), "Shelter Number " + i));
+            animalsOutsideShelters.add(new Animal("Animal Number "+ i, Integer.toString(i), 0,"",0,""));
         }
         writeFile();
     }
@@ -26,7 +29,9 @@ public class ShelterTrackerApplication extends Application {
         return shelterList;
     }
 
-
+    public List<Animal> getAnimalsOutsideShelters() {
+        return animalsOutsideShelters;
+    }
 
     public void writeFile() {
 
