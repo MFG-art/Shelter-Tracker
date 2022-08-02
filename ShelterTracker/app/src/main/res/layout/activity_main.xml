@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:text="Shelter Tracker Application"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:padding="50dp"
         android:textSize="40sp"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:hint="Enter a file name"
+        android:hint="@string/filename_hint"
         android:inputType="text"
         android:autofillHints="none"
         />
@@ -35,8 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
-        android:onClick="showShelterList"
-        android:text="Read File"
+        android:text="@string/read"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +48,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
         android:onClick="showShelterList"
-        android:text="Show Shelters"
+        android:text="@string/show_shelters"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +60,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
         android:onClick="showAnimalsOutsideShelters"
-        android:text="Show Animals Outside Shelters"
+        android:text="@string/show_animals_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -72,7 +71,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Export all animals"
+        android:text="@string/export_all"
         />
 
 

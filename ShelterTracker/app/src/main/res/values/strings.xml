@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ShelterTracker</string>
+    <string name="receive_animal">Which shelter should receive the animal?</string>
+    <string name="filename_hint">Enter a file name:</string>
+    <string name="read">Read File</string>
+    <string name="show_shelters">Show Shelters</string>
+    <string name="show_animals_btn">Show Animals Outside Shelters</string>
+    <string name="export_all">Export All Animals</string>
+    <string name="shelter_list_title">List of Shelters</string>
+    <string name="enabled">Enable Receiving Animals</string>
+    <string name="disabled">Disable Receiving Animals</string>
+    <string name="export_shelter">Export Shelter Animals to JSON</string>
+    <string name="animals_outside_shelters">Animals Outside of a Shelter</string>
 </resources>

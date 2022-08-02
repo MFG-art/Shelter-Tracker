@@ -5,12 +5,12 @@
       <map>
         <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2265" />
         <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
-        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_accepting_animal.xml" value="0.25" />
-        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_animal_list.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_accepting_animal.xml" value="0.1" />
+        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_animal_list.xml" value="0.1" />
+        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_main4.xml" value="0.1" />
-        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_shelter.xml" value="0.25" />
-        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_shelter_list.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_shelter.xml" value="0.1" />
+        <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/activity_shelter_list.xml" value="0.1" />
         <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/animal_list_item.xml" value="0.1" />
         <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/animal_list_iten.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Mauricio/Documents/Github/ICS-372-Group-Project-2/ShelterTracker/app/src/main/res/layout/layout.xml" value="0.22826086956521738" />

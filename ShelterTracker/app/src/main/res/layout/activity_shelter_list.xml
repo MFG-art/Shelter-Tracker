@@ -14,7 +14,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:padding="8dp"
-        android:text="List of Shelters"/>
+        android:text="@string/shelter_list_title"/>
 
     <ListView
         android:id="@+id/shelter_list"
