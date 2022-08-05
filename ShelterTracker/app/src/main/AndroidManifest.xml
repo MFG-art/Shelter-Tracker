@@ -15,10 +15,10 @@
         android:theme="@style/Theme.ShelterTracker"
         tools:targetApi="31">
         <activity
-            android:name=".AcceptingAnimal"
+            android:name=".AcceptingAnimalActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_shelter"
+            android:name=".ShelterActivity"
             android:exported="false" />
         <activity
             android:name=".ShelterListActivity"

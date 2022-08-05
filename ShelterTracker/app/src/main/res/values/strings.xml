@@ -11,4 +11,8 @@
     <string name="disabled">Disable Receiving Animals</string>
     <string name="export_shelter">Export Shelter Animals to JSON</string>
     <string name="animals_outside_shelters">Animals Outside of a Shelter</string>
+    <string name="dialog_message">Do you want to remove this animal from the shelter?</string>
+    <string name="dialog_title">Remove Animal?</string>
+    <string name="no">No</string>
+    <string name="ok">Yes. I want to remove the animal from the shelter</string>
 </resources>

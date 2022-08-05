@@ -1,8 +1,12 @@
 package edu.metrostate.sheltertracker;
 
 import android.app.Application;
+import android.content.res.Configuration;
 import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;
