@@ -7,7 +7,8 @@ This class is used to represent the shelter objects
  */
 
 public class Animal {
-    public Animal(String animalName, String animalId, double weight, String animalType, long receiptDate, String weightUnit) {
+    public Animal(String shelterId, String animalType, String animalName, String animalId, double weight, long receiptDate, String weightUnit) {
+        this.shelterId = shelterId;
         this.animalName = animalName;
         this.animalId = animalId;
         this.weight = weight;
@@ -40,12 +41,17 @@ public class Animal {
         return weightUnit;
     }
 
+    public String getShelterId() {
+        return shelterId;
+    }
+
     private String animalName;
     private String animalId;
     private double weight;
     private String animalType;
     private long receiptDate;
     private String weightUnit;
+    private String shelterId;
 
     @NonNull
     public String toString(){

@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -42,12 +44,30 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void readFile(View view){
+    public void readFile(View view) throws JSONException {
         EditText filename = findViewById(R.id.filename);
         String userInput = String.valueOf(filename.getText());
 
-//        code from reading json class will receive a filename string
+//        code from reading json or xml class will receive a filename string
+        String[] splitFilename = userInput.split("\\.");
+        String fileType = splitFilename[1];
 
+        if (fileType.equals("json")) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Its json",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            JSONReader jsonReader = new JSONReader();
+            jsonReader.openFile(userInput);
+            jsonReader.parseFile(((ShelterTrackerApplication)getApplication()).getShelterList(), ((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters());
+        } else if (fileType.equals("xml")){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Its xml",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            XMLReaderDOM xmlReaderDOM = new XMLReaderDOM();
+            xmlReaderDOM.fileReader(userInput, ((ShelterTrackerApplication)getApplication()).getShelterList(), ((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters());
+        }
 
 //        This code will run if the file is successfully read
         Toast toast = Toast.makeText(getApplicationContext(),

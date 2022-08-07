@@ -9,7 +9,7 @@ This class is used to represent the shelter objects
 
 public class Shelter {
     private final String shelterId;
-    private final String shelterName;
+    private String shelterName;
     private Boolean receivesAnimals;
     private final List<Animal> animalList = new ArrayList<>();
 
@@ -35,5 +35,17 @@ public class Shelter {
 //    Adds incoming animal to list
     public void acceptAnimal(Animal animal){
         animalList.add(animal);
+    }
+
+    public void setShelterName(String shelterName) {
+        this.shelterName = shelterName;
+    }
+
+    public boolean getReceivingAnimal() {
+        return receivesAnimals;
+    }
+
+    public List<Animal> getAnimalList() {
+        return animalList;
     }
 }
