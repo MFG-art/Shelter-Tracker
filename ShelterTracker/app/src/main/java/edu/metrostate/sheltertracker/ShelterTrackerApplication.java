@@ -24,7 +24,9 @@ public class ShelterTrackerApplication extends Application {
         super.onCreate();
         for(int i = 0; i < 20; i++) {
             shelterList.add(new Shelter(Integer.toString(i), "Shelter Number " + i));
-            animalsOutsideShelters.add(new Animal("Animal Number "+ i, Integer.toString(i), 0,"",0,""));
+
+            //animalsOutsideShelters.add(new Animal("Animal Number "+ i, Integer.toString(i), 0,"",0,""));
+            animalsOutsideShelters.add(new Animal("Shelter ID","Animal Number "+ i, Integer.toString(i), "",0,0,""));
         }
         writeFile();
     }
