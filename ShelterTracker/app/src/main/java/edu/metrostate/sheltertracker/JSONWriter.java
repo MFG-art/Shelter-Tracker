@@ -1,27 +1,30 @@
 package edu.metrostate.sheltertracker;
 
-import java.io.*;
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.*;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 //import org.json.simple.JSONObject;
 //import org.json.simple.JSONArray;
 
-public class JSONWriter implements Writer {
-    public boolean openFile(String filename) {
-        return true;
-    }
+//import java.io.File;
+
+public class JSONWriter extends AppCompatActivity {
 
     public boolean write(List<Shelter> shelterList, List<Animal> animalsOutsideShelters) {
         return true;
     }
 
-    public boolean writeShelter(List<Shelter> shelterList, List<Animal> animalsOutsideShelters, String shelterID) {
+    public JSONObject writeShelter(List<Shelter> shelterList, List<Animal> animalsOutsideShelters, String shelterID) throws JSONException {
         boolean fileWritten = false;
         for (Shelter shelter : shelterList) {
             if (shelter.getShelterId().equals(shelterID)) {
-                try {
+                //try {
 
                     JSONArray shelterJSONArray = new JSONArray();
                     List<Animal> shelterAnimals = shelter.getAnimalList();
@@ -46,22 +49,48 @@ public class JSONWriter implements Writer {
                     writeToJSON.put("shelter_roster", shelterJSONArray);
 
                     String JSONFilename = "Shelter_" + shelterID + ".json";
-                    FileWriter myWriter = new FileWriter(JSONFilename);
+
+                    //File externalDir = getExternalFilesDir(null);
+
+                    //File outputFile = new File(externalDir, "myfile.txt");
+
+                    //try {
+                    //    Files.createFile(outputFile.toPath());
+                    //    Files.write(outputFile.toPath(), "My data".getBytes());
+
+                    //} catch (IOException ex) {
+                    //    Log.e("FileCreation", "Error creating file", ex);
+                    //}
+
+                    /*Writer output = null;
+                    File file = new File("storage/sdcard/Android/data/edu.metrostate.sheltertracker/files/" + JSONFilename);
+                    output = new BufferedWriter(new FileWriter(file));
+                    Log.d("successssssssssssdafdvcvcvbsss", "test fail");
+                    output.write(writeToJSON.toString());
+                    output.close();*/
+
+                    Log.d("successssssssssssdafdvcvcvbsss", writeToJSON.toString());
+
+                    return writeToJSON;
+
+                    //FileWriter myWriter = new FileWriter(JSONFilename);
 
                     //myWriter.write(writeToJSON.toJSONString());
-                    myWriter.write(writeToJSON.toString());
+                    //myWriter.write(writeToJSON.toString());
+                    //myWriter.write(writeToJSON.toJSONArray());
 
-                    myWriter.close();
-                    fileWritten = true;
-                } catch (Exception e) {
-                    System.out.println("An error occurred.");
-                    e.printStackTrace();
-                }
+                    //myWriter.close();
+                    //fileWritten = true;
+                //} catch (Exception e) {
+                //    Log.d("successssssssssssdafdvcvcvbsss", "didnt create file");
+                //    System.out.println("An error occurred.");
+                //    e.printStackTrace();
+                //}
 
             }
 
         }
-        return fileWritten;
+        return null;
     }
 }
 

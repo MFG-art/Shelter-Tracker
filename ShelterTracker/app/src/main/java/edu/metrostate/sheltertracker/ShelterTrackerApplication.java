@@ -1,14 +1,13 @@
 package edu.metrostate.sheltertracker;
 
 import android.app.Application;
-import android.content.res.Configuration;
-import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -23,13 +22,47 @@ public class ShelterTrackerApplication extends Application {
     public void onCreate() {
         super.onCreate();
         for(int i = 0; i < 20; i++) {
-            shelterList.add(new Shelter(Integer.toString(i), "Shelter Number " + i));
+            //shelterList.add(new Shelter(Integer.toString(i), "Shelter Number " + i));
 
             //animalsOutsideShelters.add(new Animal("Animal Number "+ i, Integer.toString(i), 0,"",0,""));
-            animalsOutsideShelters.add(new Animal("Shelter ID","Animal Number "+ i, Integer.toString(i), "",0,0,""));
+
+            //animalsOutsideShelters.add(new Animal("Shelter ID","Animal Number "+ i, Integer.toString(i), "",0,0,""));
         }
         writeFile();
+
+        File externalDir = getExternalFilesDir(null);
+        File stateFile = new File(externalDir, "state.json");
+
+        State state = new State();
+        if (state.openFile(stateFile)) {
+            state.parseFile(getShelterList(), getAnimalsOutsideShelters());
+        }
     }
+
+    /*@Override
+    protected void onDestroy() {
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Successfully wrote state",
+                Toast.LENGTH_SHORT);
+        toast.show();
+
+        State state = new State();
+        JSONObject writeToJSON = state.write(getShelterList(), getAnimalsOutsideShelters());
+
+        File externalDir = getExternalFilesDir(null);
+        File stateFile = new File(externalDir, "state.json");
+
+        try {
+            FileWriter myWriter = new FileWriter(stateFile);
+            myWriter.write(writeToJSON.toString());
+            myWriter.close();
+        } catch (IOException ex) {
+            Log.d("successssssssssssdafdvcvcvbsss", "didnt create state file");
+            Log.e("FileCreation", "Error creating file", ex);
+        }
+
+        super.onDestroy();
+    }*/
 
     public List<Shelter> getShelterList() {
         return shelterList;
@@ -37,6 +70,16 @@ public class ShelterTrackerApplication extends Application {
 
     public List<Animal> getAnimalsOutsideShelters() {
         return animalsOutsideShelters;
+    }
+
+    public File readFile(String filename) {
+        //File externalDir = getExternalFilesDir(null);
+        //File inputFile = new File(externalDir, filename);
+
+        //Files.f
+
+        //return inputFile;
+        return null;
     }
 
     public void writeFile() {

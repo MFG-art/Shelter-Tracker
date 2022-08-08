@@ -8,14 +8,15 @@ This class is used to represent the shelter objects
  */
 
 public class Shelter {
-    private final String shelterId;
+    private String shelterId;
     private String shelterName;
     private Boolean receivesAnimals;
-    private final List<Animal> animalList = new ArrayList<>();
+    private List<Animal> animalList = new ArrayList<Animal>();
 
     public Shelter(String shelterId, String shelterName) {
         this.shelterId = shelterId;
         this.shelterName = shelterName;
+        this.receivesAnimals = true;
     }
 
     public String getShelterId() {

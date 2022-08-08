@@ -1,17 +1,16 @@
 package edu.metrostate.sheltertracker;
 
-//import com.google.gson.JsonParser;
+import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.*;
+
+import org.json.*;
+//import org.json.JSONException;
+//import org.json.JSONObject;
+import java.io.*;
 import java.lang.reflect.Type;
 //import com.google.gson.JsonParser;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
@@ -20,86 +19,102 @@ import java.util.*;
 //import org.json.simple.parser.ParseException;
 //import org.json.simple.parser.JSONParser;
 
-public class State implements Reader,Writer{
-    String filename = "state.json";
+public class State{ //implements Reader,Writer{
+    //String filename = "state.json";
 
-    //JsonParser jsonParser = new JSONParser();
-    String in;
-    JSONObject jsonReader = new JSONObject(in);
+    JsonParser jsonParser = new JsonParser();
+    //String in;
+    //JSONObject jsonReader = new JSONObject(in);
 
-    JSONObject jsonObject;
+    JsonObject jsonObject;
 
-    public State() throws JSONException {
-    }
+    //public State() throws JSONException {
+    //}
 
     /** This method checks if a file exists. If it does, it will create it to a JSON object and close the file
      */
-    public boolean openFile(String filename) {
+    public boolean openFile(File file) {
         boolean fileOpened = false;
 
-        try (FileReader reader = new FileReader(filename)) {
+        Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", "cool");
+
+        try (FileReader reader = new FileReader(file)) {
             //Read JSON file
 
-            //jsonObject = (JSONObject) jsonParser.parse(reader);
-            jsonObject = (JSONObject) jsonReader.getJSONObject(filename);
+            jsonObject = (JsonObject) jsonParser.parseReader(reader);
+            //jsonObject = (JSONObject) jsonReader.getJSONObject(filename);
 
             reader.close();
             fileOpened = true; // this means the code was able to open the JSON file
         } catch (FileNotFoundException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         } finally {
             return fileOpened;
         }
     }
 
     //    This receives two empty lists passed from main and fills them with items from json file
-    public boolean parseFile(List<Shelter> shelterList, List<Animal> animalsOutsideShelters) throws JSONException {
+    public boolean parseFile(List<Shelter> shelterList, List<Animal> animalsOutsideShelters) {
         boolean fileParsed = true;
 
-        JSONArray shelterRoster = (JSONArray) jsonObject.get("shelter_roster");
+        Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", "supercool");
+
+        JsonArray shelterRoster = (JsonArray) jsonObject.get("shelter_roster");
 
         //int shelterLength = shelterRoster.toArray().length;
-        int shelterLength = shelterRoster.length();
+        int shelterLength = shelterRoster.size();
         //Object[] shelterArray = shelterRoster.toArray();
 
         for (int i = 0; i < shelterLength; i++) {
 
 
 //              These are used to create the empty shelter objects
+            Boolean receiving_animal;
+            String shelter_name;
+            String shelter_id;
 
-            Boolean receiving_animal = (Boolean) ((JSONObject) shelterRoster.get(i)).get("receiving_animal");
-            String shelter_name = (String) ((JSONObject) shelterRoster.get(i)).get("shelter_name");
-            String shelter_id = (String) ((JSONObject) shelterRoster.get(i)).get("shelter_id");
+            receiving_animal = (((JsonObject) shelterRoster.get(i)).get("receiving_animal")).getAsBoolean();
+            Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", "test1");
+            shelter_name = (((JsonObject) shelterRoster.get(i)).get("shelter_name")).getAsString();
+            Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", "test2");
+            shelter_id = (((JsonObject) shelterRoster.get(i)).get("shelter_id")).getAsString();
 
-            Shelter newShelter = new Shelter(shelter_id, null);
+            Shelter newShelter = new Shelter(shelter_id, "null");
 
             newShelter.setShelterName(shelter_name);
 
             //JSONObject animalRosterObject =
-            JSONArray animalRoster = (JSONArray) ((JSONObject) shelterRoster.get(i)).get("animal_list");
+            JsonArray animalRoster = (JsonArray) ((JsonObject) shelterRoster.get(i)).get("animal_list");
 
             //int animalLength = animalRoster.toArray().length;
-            int animalLength = animalRoster.length();
+            int animalLength = animalRoster.size();
             //Object[] animalArray = animalRoster.toArray();
 
             for (int j = 0; j < animalLength; j++) {
 //              These are used to create the animal objects
 
-                String animal_type = (String) ((JSONObject) animalRoster.get(j)).get("animal_type");
-                String animal_name = (String) ((JSONObject) animalRoster.get(j)).get("animal_name");
-                String animal_id = (String) ((JSONObject) animalRoster.get(j)).get("animal_id");
-                double weight = (double) ((JSONObject) animalRoster.get(j)).get("weight");
-                long receipt_date = (long) ((JSONObject) animalRoster.get(j)).get("receipt_date");
-                String weight_unit = (String) ((JSONObject) animalRoster.get(j)).get("weight_unit");
+                String animal_type;
+                String animal_name;
+                String animal_id;
+                double weight;
+                long receipt_date;
+                String weight_unit ;
+
+                animal_type = (((JsonObject) animalRoster.get(j)).get("animal_type")).getAsString();
+                animal_name = (((JsonObject) animalRoster.get(j)).get("animal_name")).getAsString();
+                animal_id = (((JsonObject) animalRoster.get(j)).get("animal_id")).getAsString();
+                weight = (((JsonObject) animalRoster.get(j)).get("weight")).getAsDouble();
+                receipt_date = (((JsonObject) animalRoster.get(j)).get("receipt_date")).getAsLong();
+                weight_unit = (((JsonObject) animalRoster.get(j)).get("weight_unit")).getAsString();
 
                 //if (shelterList.size() == 0) {
                 //    shelterList.add(newShelter);
                 //}
 
-                if (shelter_id == null) {
-                    animalsOutsideShelters.add(new Animal(null, animal_type, animal_name, animal_id, weight, receipt_date, weight_unit));
+                if (shelter_id == "null") {
+                    animalsOutsideShelters.add(new Animal("null", animal_type, animal_name, animal_id, weight, receipt_date, weight_unit));
                 }
                 else {
                     newShelter.acceptAnimal(new Animal(shelter_id, animal_type, animal_name, animal_id, weight, receipt_date, weight_unit));
@@ -127,7 +142,7 @@ public class State implements Reader,Writer{
                 newShelter.changeAvailability();
             }
 
-            if (shelter_id != null) {
+            if (shelter_id != "null") {
                 shelterList.add(newShelter);
             }
 
@@ -161,18 +176,25 @@ public class State implements Reader,Writer{
     }
 
     //    This gets the two full lists from main and writes them to state.json
-    public boolean write(List<Shelter> shelterList, List<Animal> animalsOutsideShelters){
+    public JSONObject write(List<Shelter> shelterList, List<Animal> animalsOutsideShelters) throws JSONException {
         boolean fileWritten = true;
 
-        try {
+        Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", "ultracool");
+
+        //try {
 //          These variables are used to convert the List of animals into a JSONArray,
 //          which can be easily converted into a JSON string
+
             JSONArray shelterJSONArray = new JSONArray();
+
+            Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", "ultracool");
 
             for (Shelter shelter : shelterList) {
                 JSONObject newShelter = new JSONObject();
 
-                newShelter.put("shelter_id", shelter.toString());
+                Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", shelter.getShelterId());
+
+                newShelter.put("shelter_id", shelter.getShelterId());
                 newShelter.put("shelter_name", shelter.getShelterName());
                 newShelter.put("receiving_animal", shelter.getReceivingAnimal());
 
@@ -180,6 +202,7 @@ public class State implements Reader,Writer{
 
 //              Add every element in the List to the JSONArray
                 for (Animal shelterAnimal : shelter.getAnimalList()) {
+                    Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", shelterAnimal.getAnimalId());
                     JSONObject newAnimal = new JSONObject();
                     newAnimal.put("shelter_id", shelterAnimal.getShelterId());
                     newAnimal.put("animal_type", shelterAnimal.getAnimalType());
@@ -202,8 +225,8 @@ public class State implements Reader,Writer{
             if (animalsOutsideShelters.size() > 0) {
                 JSONObject newShelter = new JSONObject();
 
-                newShelter.put("shelter_id", null);
-                newShelter.put("shelter_name", null);
+                newShelter.put("shelter_id", "null");
+                newShelter.put("shelter_name", "null");
                 newShelter.put("receiving_animal", true);
 
                 JSONArray animalJSONArray = new JSONArray();
@@ -230,23 +253,29 @@ public class State implements Reader,Writer{
             JSONObject writeToJSON = new JSONObject();
             writeToJSON.put("shelter_roster", shelterJSONArray);
 
-            String JSONFilename = filename;
-            FileWriter myWriter = new FileWriter(JSONFilename);
+            String JSONFilename = "state.json";
+
+            Log.d("successssssssssqqqqqqqqqqqqqqqssdafdvcvcvbsss", writeToJSON.toString());
+
+            return writeToJSON;
+
+            //FileWriter myWriter = new FileWriter(JSONFilename);
 
             //myWriter.write(writeToJSON.toJSONString());
-            myWriter.write(writeToJSON.toString());
+            //myWriter.write(writeToJSON.toString());
 
-            myWriter.close();
+            //myWriter.close();
             //System.out.println("Successfully wrote to the file.");
             //System.out.println("Successfully wrote to the file.");
 
 
-        } catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+        //} catch (Exception e) {
+        //    Log.d("successssssssssssdafdvcvcvbsss", "didnt create state file");
+        //    System.out.println("An error occurred.");
+        //    e.printStackTrace();
+        //}
 
-        return fileWritten;
+        //return null;
     }
 
 }
