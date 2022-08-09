@@ -51,7 +51,7 @@ public class Shelter {
     }
 
     public void removeAnimal(Animal animal, List<Animal> animalsOutsideShelters) {
-        animalsOutsideShelters.add(animal);
         animalList.remove(animal);
+        animalsOutsideShelters.add(animal);
     }
 }

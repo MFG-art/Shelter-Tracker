@@ -1,5 +1,7 @@
 package edu.metrostate.sheltertracker;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.List;
 
 /**
@@ -7,10 +9,10 @@ import java.util.List;
  *It exists to make it easier to create new classes that need to write to a file
  */
 
-//public interface Writer {
+public interface Writer {
 
     //public boolean openFile(String filename);
-    //public boolean write(List<Shelter> shelterList, List<Animal> animalsOutsideShelters);
+    public JSONObject write(List<Shelter> shelterList, List<Animal> animalsOutsideShelters) throws JSONException;
 
 
-//}
+}

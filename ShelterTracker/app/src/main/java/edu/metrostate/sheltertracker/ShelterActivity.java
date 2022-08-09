@@ -6,12 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+import org.json.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class ShelterActivity extends AppCompatActivity {
@@ -24,18 +31,17 @@ public class ShelterActivity extends AppCompatActivity {
 
         final String shelterID = getIntent().getStringExtra("Shelter ID");
 
-        int tempPosition = -1;
-        final int shelterPosition;
-        int count = 0;
+        int shelterPosition = -1;
+        int shelterCount = 0;
 
         for (Shelter shelter : ((ShelterTrackerApplication)getApplication()).getShelterList()) {
             if (shelter.getShelterId().equals(shelterID)) {
-                tempPosition = count;
+                shelterPosition = shelterCount;
             }
-            ++count;
+            ++shelterCount;
         }
 
-        shelterPosition = tempPosition;
+        Shelter shelter = ((ShelterTrackerApplication)getApplication()).getShelterList().get(shelterPosition);
 
         ListView lv = findViewById(R.id.animal_list);
 
@@ -52,7 +58,10 @@ public class ShelterActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 //                        If the user clicks ok, remove the animal from the shelter
 
-                        TextView animalID = view.findViewById(R.id.animal_id);
+                        String animalID = ((TextView) view.findViewById(R.id.animal_id)).getText().toString();
+
+                        Log.d("cool", "test");
+                        Log.d("cool", animalID);
 
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 "The animal was removed from the shelter",
@@ -60,22 +69,43 @@ public class ShelterActivity extends AppCompatActivity {
                         toast.show();
 
                         int animalPosition = -1;
-                        int animalcount = 0;
-                        for (Animal animal : ((ShelterTrackerApplication)getApplication()).getShelterList().get(shelterPosition).getAnimalList()) {
+                        int animalCount = 0;
+
+                        for (Animal animal : shelter.getAnimalList()) {
                             if ((animal.getAnimalId()).equals(animalID)) {
-                                animalPosition = animalcount;
+                                animalPosition = animalCount;
                             }
-                            ++animalcount;
+                            ++animalCount;
                         }
 
-
                         List<Animal> animalsOutsideShelters = ((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters();
-                        Shelter shelter = ((ShelterTrackerApplication)getApplication()).getShelterList().get(shelterPosition);
                         Animal animalRemoved = shelter.getAnimalList().get(animalPosition);
-                        shelter.removeAnimal(animalRemoved,animalsOutsideShelters);
+
+                        shelter.removeAnimal(animalRemoved, animalsOutsideShelters);
+
+                        State state = new State();
+                        JSONObject writeToJSON;
+
+                        {
+                            try {
+                                writeToJSON = state.write(((ShelterTrackerApplication)getApplication()).getShelterList(), ((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters());
+
+                                File externalDir = getExternalFilesDir(null);
+                                File stateFile = new File(externalDir, "state.json");
+
+                                FileWriter myWriter = new FileWriter(stateFile);
+                                myWriter.write(writeToJSON.toString());
+                                myWriter.close();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                Log.d("successssssssssssdafdvcvcvbsss", "didnt create state file");
+                                e.printStackTrace();
+                            }
+                        }
 
                         Intent intent = new Intent(ShelterActivity.this, ShelterListActivity.class);
-//                        intent.putExtra("Shelter ID",shelterID);
+                        //intent.putExtra("Shelter ID",shelterID);
                         startActivity(intent);
                     }
                 });
@@ -96,7 +126,7 @@ public class ShelterActivity extends AppCompatActivity {
 
         lv.setAdapter(new AnimalAdapter(this,
                     //((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters()));
-                ((ShelterTrackerApplication)getApplication()).getShelterList().get(shelterPosition).getAnimalList()));
+                shelter.getAnimalList()));
 
     }
 
