@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
             toast2.show();
         }
 
+        Log.d("successssssssssssdafdvcvcvbsssqqqqqqqqqqqqqq", ((ShelterTrackerApplication)getApplication()).getShelterList().get(0).getAnimalList().get(0).getAnimalName());
+
 //        This code will run if the file is successfully read
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Successfully read file",

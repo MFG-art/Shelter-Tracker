@@ -55,8 +55,19 @@ public class ShelterActivity extends AppCompatActivity {
             }
         });
 
+        int shelterPosition = -1;
+        int count = 0;
+
+        for (Shelter shelter : ((ShelterTrackerApplication)getApplication()).getShelterList()) {
+            if (shelter.getShelterId().equals(shelterID)) {
+                shelterPosition = count;
+            }
+            ++count;
+        }
+
         lv.setAdapter(new AnimalAdapter(this,
-                    ((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters()));
+                    //((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters()));
+                ((ShelterTrackerApplication)getApplication()).getShelterList().get(shelterPosition).getAnimalList()));
 
     }
 
