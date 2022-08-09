@@ -28,7 +28,6 @@ public class ShelterTrackerApplication extends Application {
 
             //animalsOutsideShelters.add(new Animal("Shelter ID","Animal Number "+ i, Integer.toString(i), "",0,0,""));
         }
-        writeFile();
 
         File externalDir = getExternalFilesDir(null);
         File stateFile = new File(externalDir, "state.json");
@@ -82,22 +81,22 @@ public class ShelterTrackerApplication extends Application {
         return null;
     }
 
-    public void writeFile() {
-
-        // this will put files in the /sdcard/Android/data/edu.metrostate.sheltertracker/files directory
-        File externalDir = getExternalFilesDir(null);
-
-        File outputFile = new File(externalDir, "myfile.txt");
-
-        try {
-            Files.createFile(outputFile.toPath());
-            Files.write(outputFile.toPath(), "My data".getBytes());
-
-        } catch (IOException ex) {
-            Log.e("FileCreation", "Error creating file", ex);
-        }
-
-    }
+//    public void writeFile() {
+//
+//        // this will put files in the /sdcard/Android/data/edu.metrostate.sheltertracker/files directory
+//        File externalDir = getExternalFilesDir(null);
+//
+//        File outputFile = new File(externalDir, "myfile.txt");
+//
+//        try {
+//            Files.createFile(outputFile.toPath());
+//            Files.write(outputFile.toPath(), "My data".getBytes());
+//
+//        } catch (IOException ex) {
+//            Log.e("FileCreation", "Error creating file", ex);
+//        }
+//
+//    }
 
 
 

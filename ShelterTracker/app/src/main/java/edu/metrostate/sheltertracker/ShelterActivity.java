@@ -12,14 +12,30 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class ShelterActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter);
 
-        String shelterID = getIntent().getStringExtra("Shelter ID");
+        final String shelterID = getIntent().getStringExtra("Shelter ID");
+
+        int tempPosition = -1;
+        final int shelterPosition;
+        int count = 0;
+
+        for (Shelter shelter : ((ShelterTrackerApplication)getApplication()).getShelterList()) {
+            if (shelter.getShelterId().equals(shelterID)) {
+                tempPosition = count;
+            }
+            ++count;
+        }
+
+        shelterPosition = tempPosition;
 
         ListView lv = findViewById(R.id.animal_list);
 
@@ -35,11 +51,32 @@ public class ShelterActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 //                        If the user clicks ok, remove the animal from the shelter
+
+                        TextView animalID = view.findViewById(R.id.animal_id);
+
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 "The animal was removed from the shelter",
                                 Toast.LENGTH_SHORT);
-
                         toast.show();
+
+                        int animalPosition = -1;
+                        int animalcount = 0;
+                        for (Animal animal : ((ShelterTrackerApplication)getApplication()).getShelterList().get(shelterPosition).getAnimalList()) {
+                            if ((animal.getAnimalId()).equals(animalID)) {
+                                animalPosition = animalcount;
+                            }
+                            ++animalcount;
+                        }
+
+
+                        List<Animal> animalsOutsideShelters = ((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters();
+                        Shelter shelter = ((ShelterTrackerApplication)getApplication()).getShelterList().get(shelterPosition);
+                        Animal animalRemoved = shelter.getAnimalList().get(animalPosition);
+                        shelter.removeAnimal(animalRemoved,animalsOutsideShelters);
+
+                        Intent intent = new Intent(ShelterActivity.this, ShelterListActivity.class);
+//                        intent.putExtra("Shelter ID",shelterID);
+                        startActivity(intent);
                     }
                 });
 
@@ -55,15 +92,7 @@ public class ShelterActivity extends AppCompatActivity {
             }
         });
 
-        int shelterPosition = -1;
-        int count = 0;
 
-        for (Shelter shelter : ((ShelterTrackerApplication)getApplication()).getShelterList()) {
-            if (shelter.getShelterId().equals(shelterID)) {
-                shelterPosition = count;
-            }
-            ++count;
-        }
 
         lv.setAdapter(new AnimalAdapter(this,
                     //((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters()));
