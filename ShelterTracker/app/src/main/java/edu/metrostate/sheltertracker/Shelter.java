@@ -50,12 +50,8 @@ public class Shelter {
         return animalList;
     }
 
-    public void addIncomingAnimal(Animal animal) {
-        if (receivesAnimals == true) {
-            animalList.add(animal);
-            //System.out.println("Shelter " + this.shelterId + " received " +animal.getAnimalName() + " the " + animal.getAnimalType());
-        } //else {
-            //System.out.println("The shelter is not allowing animals");
-        //}
+    public void removeAnimal(Animal animal, List<Animal> animalsOutsideShelters) {
+        animalsOutsideShelters.add(animal);
+        animalList.remove(animal);
     }
 }
