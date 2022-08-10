@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class AcceptingAnimalActivity extends AppCompatActivity {
 
     @Override
@@ -31,6 +33,37 @@ public class AcceptingAnimalActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT);
 
                 toast.show();
+
+                String animalID = getIntent().getStringExtra("Animal ID");
+                TextView shelterView = findViewById(R.id.shelter_id);
+                String shelterID = (String) shelterView.getText();
+                List<Animal> animalsOutsideShelters = ((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters();
+                List<Shelter> shelterList = ((ShelterTrackerApplication)getApplication()).getShelterList();
+
+                int position = -1;
+                int count = 0;
+
+                for (Animal animal :animalsOutsideShelters){
+                    if ((animal.getAnimalId()).equals(animalID)) {
+                        position = count;
+                    }
+                    ++count;
+                }
+
+                Animal animal = animalsOutsideShelters.remove(position);
+
+                position = -1;
+                count = 0;
+
+                for (Shelter shelter: shelterList){
+                    if ((shelter.getShelterId()).equals(shelterID)) {
+                        position = count;
+                    }
+                    ++count;
+                }
+
+                shelterList.get(position).acceptAnimal(animal);
+
 
             }
         });
