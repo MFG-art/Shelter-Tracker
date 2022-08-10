@@ -68,8 +68,14 @@ public class AcceptingAnimalActivity extends AppCompatActivity {
             }
         });
 
-        lv.setAdapter(new ShelterAdapter(this,
-                ((ShelterTrackerApplication)getApplication()).getShelterList()));
+        List<Shelter> acceptingShelters = ((ShelterTrackerApplication)getApplication()).getShelterList();
+        for (Shelter shelter: acceptingShelters){
+            if (!shelter.getReceivingAnimal()){ // if not accepting animals, remove
+                acceptingShelters.remove(shelter);
+            }
+        }
+
+        lv.setAdapter(new ShelterAdapter(this, acceptingShelters));
     }
 
     //    When the app is closed, this will run and call the write state method

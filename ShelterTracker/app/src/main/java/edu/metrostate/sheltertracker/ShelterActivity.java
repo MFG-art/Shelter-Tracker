@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,15 @@ public class ShelterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter);
 
-        final String shelterID = getIntent().getStringExtra("Shelter ID");
+        String shelterID = getIntent().getStringExtra("Shelter ID");
+        String shelterName = getIntent().getStringExtra("Shelter name");
+
+        TextView nameView= findViewById(R.id.shelter_name);
+        TextView idView= findViewById(R.id.shelter_id);
+        Button button = findViewById(R.id.accepting_animals_button);
+
+        nameView.setText(shelterName);
+        idView.setText(shelterID);
 
         int shelterPosition = -1;
         int shelterCount = 0;
@@ -37,6 +46,12 @@ public class ShelterActivity extends AppCompatActivity {
         for (Shelter shelter : ((ShelterTrackerApplication)getApplication()).getShelterList()) {
             if (shelter.getShelterId().equals(shelterID)) {
                 shelterPosition = shelterCount;
+                if (shelter.getReceivingAnimal()){
+                    button.setText("Shelter is accepting animals");
+                } else {
+                    button.setText("Shelter is not accepting animals");
+                }
+
             }
             ++shelterCount;
         }
@@ -127,6 +142,28 @@ public class ShelterActivity extends AppCompatActivity {
         lv.setAdapter(new AnimalAdapter(this,
                     //((ShelterTrackerApplication)getApplication()).getAnimalsOutsideShelters()));
                 shelter.getAnimalList()));
+
+    }
+
+    public void changeAvailability(View view){
+        String shelterID = getIntent().getStringExtra("Shelter ID");
+        List<Shelter> shelterList = ((ShelterTrackerApplication)getApplication()).getShelterList();
+
+        Button button = findViewById(R.id.accepting_animals_button);
+
+        int position = -1;
+        int count = 0;
+        for (Shelter shelter : shelterList){
+            if (shelter.getShelterId().equals(shelterID)){
+                shelter.changeAvailability();
+            }
+            count++;
+        }
+
+        Intent intent = new Intent(ShelterActivity.this,ShelterActivity.class);
+        intent.putExtra("Shelter ID",shelterID);
+        intent.putExtra("Shelter name",getIntent().getStringExtra("Shelter name"));
+        startActivity(intent);
 
     }
 

@@ -24,9 +24,11 @@ public class ShelterListActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textview = view.findViewById(R.id.shelter_id);
+                TextView idTextView = view.findViewById(R.id.shelter_id);
+                TextView nameTextView = view.findViewById(R.id.shelter_name);
                 Intent intent = new Intent(ShelterListActivity.this, ShelterActivity.class);
-                intent.putExtra("Shelter ID",textview.getText());
+                intent.putExtra("Shelter ID",idTextView.getText());
+                intent.putExtra("Shelter name", nameTextView.getText());
 
                 startActivity(intent);
 
@@ -36,6 +38,11 @@ public class ShelterListActivity extends AppCompatActivity {
         lv.setAdapter(new ShelterAdapter(this,
                 ((ShelterTrackerApplication)getApplication()).getShelterList()));
 
+    }
+
+    public void returnToMainScreen(View view){
+        Intent intent = new Intent(ShelterListActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     //    When the app is closed, this will run and call the write state method

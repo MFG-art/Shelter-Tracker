@@ -24,4 +24,14 @@
         android:background="@color/white"
         />
 
+    <Button
+        android:id="@+id/return_to_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="returnToMainScreen"
+        android:text="@string/return_main"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        />
+
 </LinearLayout>

@@ -15,4 +15,5 @@
     <string name="dialog_title">Remove Animal?</string>
     <string name="no">No</string>
     <string name="ok">Yes. I want to remove the animal from the shelter</string>
+    <string name="return_main">Return to main screen</string>
 </resources>
